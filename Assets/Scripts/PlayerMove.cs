@@ -35,7 +35,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         // Direction Sprite
-        if (Input.GetButtonDown("Horizontal"))
+        if (Input.GetButton("Horizontal"))
         {
             spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
         }
@@ -83,7 +83,13 @@ public class PlayerMove : MonoBehaviour
     {
         if(collision.gameObject.tag == "Enemy")
         {
-            OnDamaged(collision.transform.position);
+            // 몬스터보다 위에있음 + 아래로 낙하 중이면 밟아서 enemy 제거
+            if(rigid.velocity.y < 0 && transform.position.y > collision.transform.position.y)
+            {
+
+            }
+            else
+                OnDamaged(collision.transform.position);
         }
     }
 
